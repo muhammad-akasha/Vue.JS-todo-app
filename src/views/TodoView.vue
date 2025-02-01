@@ -51,12 +51,17 @@ const deleteTodo = (index) => {
             placeholder="edit a todo"
           />
           <button v-if="editMode === index" @click="editTodo" class="edit-btn">Edit Todo</button>
-          <h2 v-if="editMode !== index">{{ item }}</h2>
+          <h2 class="todo-title" v-if="editMode !== index">
+            {{ item }}
+          </h2>
           <div class="todo-actions">
-            <span v-if="editMode !== index" @click="startEditing(index, item)" class="edit-icon"
+            <span
+              v-if="editMode !== index"
+              @click="startEditing(index, item)"
+              class="edit-icon pointer"
               ><IconEdit
             /></span>
-            <span v-if="editMode !== index" @click="deleteTodo(index)" class="delete-icon"
+            <span v-if="editMode !== index" @click="deleteTodo(index)" class="delete-icon pointer"
               ><DeleteIcon
             /></span>
           </div>
@@ -67,6 +72,9 @@ const deleteTodo = (index) => {
 </template>
 
 <style scoped>
+.pointer {
+  cursor: pointer;
+}
 .todo-container {
   width: 600px;
   margin: auto;
@@ -133,9 +141,9 @@ ul {
 }
 
 .todo-item {
-  font-size: 20px;
+  font-size: 13px;
   background-color: #fff;
-  padding: 15px;
+  padding: 10px;
   margin-bottom: 10px;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -144,6 +152,11 @@ ul {
     transform 0.2s;
 }
 
+.todo-title {
+  word-wrap: break-word;
+  white-space: normal;
+  width: 80%;
+}
 .todo-item:hover {
   background-color: #f1f1f1;
   transform: translateY(-2px);
@@ -175,5 +188,11 @@ ul {
 .delete-icon svg {
   width: 30px;
   height: 30px;
+}
+@media (max-width: 700px) {
+  .todo-container {
+    width: 100%;
+    padding: 20px 10px;
+  }
 }
 </style>
